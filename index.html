@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="TechExam — portal ujian Pemerintahan Desa dengan 100 soal pilihan ganda, token akses, timer, nilai akhir, dan barcode.">
+  <title>TechExam — Ujian Pemerintahan Desa</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/jsbarcode@3.12.3/dist/JsBarcode.all.min.js" integrity="sha512-fLmJPYDfCIAZ0gpG/iiIzPw113KquhzI1bxG0XhiLYyqm8Ax2lEiq1h1qv2vafH9tLzkjm4HYRWSeKoGFH4xIw==" crossorigin="anonymous"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <section class="first-access-splash" id="firstAccessSplash" aria-label="Memuat TechExam">
+    <div class="splash-grid" aria-hidden="true"></div>
+    <div class="splash-glow splash-glow-one" aria-hidden="true"></div>
+    <div class="splash-glow splash-glow-two" aria-hidden="true"></div>
+    <div class="splash-content">
+      <div class="splash-emblem" aria-hidden="true"><span class="splash-orbit orbit-a"></span><span class="splash-orbit orbit-b"></span><span class="splash-core">T<span>/</span>X</span><i class="splash-spark spark-a"></i><i class="splash-spark spark-b"></i></div>
+      <div class="splash-kicker"><span class="splash-live-dot"></span> SECURE ASSESSMENT ENVIRONMENT</div>
+      <h1>TECH<span>EXAM</span></h1>
+      <p class="splash-tagline">Siapkan fokusmu. Buktikan kemampuanmu.</p>
+      <div class="splash-loader"><span></span></div>
+      <div class="splash-status"><span>INITIALIZING EXAM MODULES</span><span>100 QUESTIONS / 02 TOKENS</span></div>
+      <button type="button" class="splash-skip" id="skipSplashButton">Lewati intro <span>↗</span></button>
+    </div>
+    <div class="splash-footer"><span>BUILD 2026.10</span><span>ACCESS CONTROL <b>●</b> ACTIVE</span></div>
+  </section>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Informasi ujian">
+      <a class="brand" href="#top" aria-label="TechExam beranda">
+        <span class="brand-mark">T<span>X</span></span>
+        <span class="brand-word">TECH<span>EXAM</span><small>ASSESSMENT PLATFORM</small></span>
+      </a>
+
+      <div class="side-divider"></div>
+      <div class="side-section-label">WORKSPACE</div>
+      <div class="side-nav-item active"><span class="nav-icon">▦</span><span>Ujian digital</span><span class="nav-dot"></span></div>
+      <div class="side-nav-item"><span class="nav-icon">⌘</span><span id="sidebarPackTitle">Paket ujian</span></div>
+
+      <div class="side-spacer"></div>
+      <div class="sidebar-info">
+        <div class="mini-label">SESSION TYPE</div>
+        <div class="session-title"><span class="status-pulse"></span> Practice exam</div>
+        <div class="session-meta"><span id="sidebarQuestionCount">— soal</span> <span>•</span> Pilihan ganda</div>
+        <div class="side-progress"><span></span></div>
+        <p>Jawaban tersimpan di browser perangkat ini selama penyimpanan lokal tersedia.</p>
+      </div>
+      <div class="sidebar-footer"><span class="footer-lock">◈</span> LOCAL SESSION <span class="footer-version">v1.0</span></div>
+    </aside>
+
+    <main class="main-content" id="top">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Ujian digital</strong></div>
+        <div class="topbar-right"><span class="secure-indicator"><i></i> MODE SIMULASI</span><span class="topbar-divider"></span><span class="topbar-date" id="todayLabel">—</span></div>
+      </header>
+
+      <section class="screen welcome-screen" id="welcomeScreen">
+        <div class="welcome-hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> KNOWLEDGE ASSESSMENT / DESA 2026</div>
+            <h1>Uji kemampuan.<br><span>Pahami tata kelola desa.</span></h1>
+            <p>Bank ujian Pemerintahan Desa dengan 100 soal pilihan ganda, dibagi menjadi dua paket akses token: DESA-2026 dan ITF-2026.</p>
+            <div class="hero-tags"><span><b>01</b> Terstruktur</span><span><b>02</b> Terukur</span><span><b>03</b> Transparan</span></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="art-core"><span class="core-symbol">{ }</span><span class="core-caption">SYSTEM<br>READY</span></div>
+            <span class="art-chip chip-one">01 / HTML</span><span class="art-chip chip-two">JS.EXE</span><span class="art-chip chip-three">&lt;/&gt;</span>
+            <span class="art-cross cross-one">+</span><span class="art-cross cross-two">+</span>
+          </div>
+          <div class="hero-index">T/X <span>—</span> 100 QUESTIONS</div>
+        </div>
+
+        <div class="welcome-grid">
+          <section class="setup-card panel">
+            <div class="panel-heading">
+              <div><div class="eyebrow muted-eyebrow">GET STARTED</div><h2>Siapkan ujianmu</h2></div>
+              <span class="step-count">STEP <b>01</b> / 02</span>
+            </div>
+            <p class="panel-subtitle">Masukkan token yang diberikan pengawas, lalu isi identitas peserta.</p>
+            <div class="legal-review-note"><span class="legal-note-icon">!</span><p><b>Catatan koreksi hukum:</b> lembar kunci yang dikirim dijadikan acuan, lalu beberapa butir dikoreksi ketika bertentangan dengan rumusan soal atau ketentuan terbaru (termasuk nomor 50, 53, 57, 74, dan 77). UU No. 3 Tahun 2024 menetapkan RPJM Desa dan masa jabatan kepala desa selama 8 tahun. Rincian koreksi tersedia di README. <a href="https://peraturan.bpk.go.id/Details/283617/uu-no-3-tahun-2024" target="_blank" rel="noopener noreferrer">Lihat sumber resmi</a>.</p></div>
+            <form id="startForm" novalidate>
+              <div class="token-gate">
+                <div class="eyebrow muted-eyebrow">ACCESS CONTROL</div>
+                <h3>Masukkan token ujian</h3>
+                <p>Setiap token membuka paket soal yang berbeda.</p>
+                <div class="token-input-row">
+                  <label class="field token-field"><span>Token akses <em>*</em></span><input id="accessToken" name="accessToken" type="password" maxlength="40" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Masukkan token dari pengawas" aria-describedby="tokenStatus"></label>
+                  <button class="button button-secondary token-verify-button" id="verifyTokenButton" type="button">Verifikasi token <span>↗</span></button>
+                </div>
+                <p class="token-status" id="tokenStatus" role="status" aria-live="polite">Masukkan token dari pengawas untuk membuka paket soal.</p>
+              </div>
+              <div id="examSetupFields" hidden>
+                <div class="setup-divider"></div>
+                <div class="form-row two-columns">
+                  <label class="field"><span>Nama peserta <em>*</em></span><input id="candidateName" name="candidateName" type="text" maxlength="70" autocomplete="name" placeholder="Masukkan nama lengkap" required></label>
+                  <label class="field"><span>Kelas / ID peserta <small>OPSIONAL</small></span><input id="candidateClass" name="candidateClass" type="text" maxlength="35" placeholder="Contoh: XII RPL 5"></label>
+                </div>
+                <div class="form-row two-columns setup-options">
+                  <label class="field"><span>Durasi ujian</span><div class="select-wrap"><select id="durationSelect" name="duration"><option value="30">30 menit</option><option value="45">45 menit</option><option value="60">60 menit</option><option value="90" selected>90 menit</option></select><span class="select-chevron">⌄</span></div></label>
+                  <label class="check-field"><input id="shuffleQuestions" type="checkbox"><span class="custom-check"></span><span><b>Acak urutan soal</b><small>Soal tampil dalam urutan berbeda</small></span></label>
+                </div>
+                <div class="setup-divider"></div>
+                <div class="setup-summary"><div class="summary-icon">▤</div><div><b id="setupSubject">Paket ujian</b><span id="setupQuestionSummary">— pertanyaan • Pilihan ganda • Nilai maksimal 100</span></div><span class="summary-badge">EXAM</span></div>
+                <button class="button button-primary button-large" id="startButton" type="submit"><span>Mulai ujian</span><span class="button-arrow">↗</span></button>
+                <div class="privacy-note"><span>◈</span> Sesi dan hasil diproses di browser perangkat ini.</div>
+                <div class="resume-box" id="resumeBox" hidden>
+                  <div class="resume-copy"><b>Menemukan sesi ujian yang tersimpan</b><span id="resumeDescription">Kamu bisa melanjutkan ujian sebelumnya.</span></div>
+                  <button type="button" class="button button-secondary" id="resumeButton">Lanjutkan sesi ↗</button>
+                  <button type="button" class="text-button" id="discardDraftButton">Hapus sesi tersimpan</button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <aside class="details-column">
+            <section class="overview-card panel">
+              <div class="card-label">EXAM OVERVIEW <span class="tiny-spark">✳</span></div>
+              <div class="overview-number" id="overviewQuestionNumber">—<span>Q</span></div>
+              <p>Total pertanyaan dalam satu sesi</p>
+              <div class="overview-divider"></div>
+              <div class="overview-metrics"><div><span>FORMAT</span><b>Pilihan ganda</b></div><div><span>SCORING</span><b>Skor 0–100</b></div><div><span>PACKAGES</span><b>2 token</b></div></div>
+            </section>
+            <section class="guide-card panel">
+              <div class="guide-icon">i</div><div><h3>Sebelum memulai</h3><p>Pilih satu jawaban terbaik untuk setiap soal. Kamu dapat berpindah soal dan menandai pertanyaan untuk ditinjau kembali.</p><details class="guide-details"><summary>Lihat panduan lengkap</summary><ol><li>Timer berjalan setelah tombol mulai ditekan.</li><li>Jawaban disimpan otomatis di browser jika penyimpanan lokal diizinkan.</li><li>Soal yang belum terjawab dapat dilihat dari panel navigasi.</li><li>Tekan <b>Selesaikan ujian</b> untuk menghitung nilai.</li><li>Barcode hasil berisi ID hasil, bukan verifikasi daring.</li></ol></details></div>
+            </section>
+          </aside>
+        </div>
+        <footer class="page-footer"><span>TECH EXAM © 2026</span><span>BUILT FOR FOCUSED LEARNING <b>●</b></span></footer>
+      </section>
+
+      <section class="screen exam-screen" id="examScreen" hidden>
+        <div class="exam-header">
+          <div><div class="eyebrow muted-eyebrow">LIVE ASSESSMENT / <span id="examCode">—</span></div><h1><span id="activeExamTitle">Paket ujian</span> <span class="live-pill"><i></i> LIVE</span></h1><p id="examCandidateLine">Peserta ujian</p></div>
+          <div class="timer-card" id="timerCard"><span class="timer-icon">◷</span><div><small>SISA WAKTU</small><strong id="timerText">90:00</strong></div><span class="timer-live-dot"></span></div>
+        </div>
+        <div class="exam-layout">
+          <section class="question-panel panel" aria-label="Soal ujian">
+            <div class="question-panel-top"><div class="question-index-label">QUESTION <b id="questionNumber">01</b><span id="questionTotal"> / —</span></div><div class="save-status" id="saveStatus"><i></i> Autosave aktif</div></div>
+            <div class="question-progress-track"><span id="questionProgressBar"></span></div>
+            <div class="question-body">
+              <div class="question-meta"><span class="category-pill" id="questionCategory">HARDWARE</span><span class="question-kind">SINGLE ANSWER</span></div>
+              <h2 id="questionText" tabindex="-1">Pertanyaan akan ditampilkan di sini.</h2>
+              <p class="option-instruction">Pilih satu jawaban yang paling tepat.</p>
+              <fieldset id="optionsContainer" class="options-list"><legend class="sr-only">Pilihan jawaban</legend></fieldset>
+              <div class="question-actions"><button class="text-button mark-button" id="markButton" type="button" aria-pressed="false"><span class="mark-icon">⚑</span><span id="markButtonText">Tandai untuk ditinjau</span></button><span class="answer-status" id="answerStatus">Belum dijawab</span></div>
+            </div>
+            <div class="question-footer"><button class="button button-secondary" id="prevButton" type="button">← Sebelumnya</button><div class="footer-center-note"><span class="keyboard-key">←</span><span class="keyboard-key">→</span> navigasi soal</div><button class="button button-primary" id="nextButton" type="button">Soal berikutnya <span>→</span></button></div>
+          </section>
+
+          <aside class="exam-aside">
+            <section class="panel navigator-panel">
+              <div class="navigator-heading"><div><h2>Navigasi soal</h2><p>Pilih nomor untuk berpindah.</p></div><span class="navigator-icon">▦</span></div>
+              <div class="answer-summary"><div><b id="answeredCount">0</b><span>Terjawab</span></div><div><b id="unansweredCount">50</b><span>Belum</span></div><div><b id="markedCount">0</b><span>Ditinjau</span></div></div>
+              <div class="nav-legend"><span><i class="legend-answered"></i>Terjawab</span><span><i class="legend-marked"></i>Ditandai</span><span><i class="legend-current"></i>Aktif</span></div>
+              <div class="question-grid" id="questionGrid" aria-label="Nomor soal"></div>
+              <div class="navigator-bottom"><span><i></i> Semua perubahan disimpan otomatis</span></div>
+            </section>
+            <section class="finish-card panel"><div class="finish-card-icon">✓</div><div><h3>Sudah yakin?</h3><p>Periksa soal yang belum dijawab sebelum mengakhiri ujian.</p></div><button type="button" class="button button-finish" id="finishButton">Selesaikan ujian <span>↗</span></button><small>Nilai dihitung setelah sesi diakhiri.</small></section>
+          </aside>
+        </div>
+        <footer class="page-footer"><span>TECH EXAM © 2026</span><span>SESI AKTIF <b class="active-dot">●</b></span></footer>
+      </section>
+
+      <section class="screen results-screen" id="resultsScreen" hidden>
+        <div class="results-topline"><div><div class="eyebrow muted-eyebrow">ASSESSMENT COMPLETE / REPORT</div><h1>Hasil ujian<span class="result-period">.</span></h1><p>Berikut ringkasan sesi ujian dan status penilaiannya.</p></div><div class="completed-stamp"><span>✓</span><div><b>SESSION COMPLETED</b><small id="resultDateTop">—</small></div></div></div>
+        <section class="result-hero panel">
+          <div class="result-score-block"><div class="card-label">YOUR FINAL SCORE</div><div class="result-score"><span id="resultScore">0</span><small>/ 100</small></div><div id="passStatus" class="score-status">—</div><p id="resultMessage">Hasil ujian berhasil dihitung.</p></div>
+          <div class="score-ring-wrap"><div class="score-ring" id="scoreRing"><div class="ring-center"><strong id="ringScore">0</strong><span>POINTS</span></div></div><div class="ring-caption">PERFORMANCE INDEX</div></div>
+          <div class="result-quick-stats"><div><span class="stat-mark correct-mark">✓</span><div><b id="resultCorrect">0</b><small>Benar</small></div></div><div><span class="stat-mark wrong-mark">×</span><div><b id="resultWrong">0</b><small>Salah</small></div></div><div><span class="stat-mark empty-mark">—</span><div><b id="resultUnanswered">0</b><small>Kosong</small></div></div></div>
+        </section>
+
+        <div class="result-content-grid">
+          <section class="panel barcode-panel">
+            <div class="panel-heading"><div><div class="eyebrow muted-eyebrow">RESULT IDENTIFIER</div><h2>Barcode hasil ujian</h2></div><span class="verified-symbol">⌁</span></div>
+            <p class="panel-subtitle">Gunakan ID ini untuk mengidentifikasi salinan hasil yang kamu simpan.</p>
+            <div class="barcode-stage"><svg id="barcode" role="img" aria-label="Barcode ID hasil ujian"></svg><div id="barcodeFallback" class="barcode-fallback" hidden>Barcode tidak dapat dimuat. Gunakan ID hasil di bawah.</div></div>
+            <div class="result-id-row"><div><small>RESULT ID</small><b id="resultId">TX-—</b></div><button class="copy-button" id="copyResultIdButton" type="button" aria-label="Salin ID hasil" title="Salin ID hasil">▢</button></div>
+            <div class="barcode-note"><span>i</span><p>Barcode Code 128 memuat ID hasil. Kode ini <b>belum</b> terhubung ke server untuk verifikasi keaslian.</p></div>
+          </section>
+          <section class="panel result-details-panel">
+            <div class="panel-heading"><div><div class="eyebrow muted-eyebrow">SESSION DETAILS</div><h2>Detail sesi</h2></div><span class="detail-icon">⌘</span></div>
+            <div class="detail-list"><div><span>Nama peserta</span><b id="resultCandidate">—</b></div><div><span>Kelas / ID</span><b id="resultClass">—</b></div><div><span>Materi</span><b id="resultSubject">—</b></div><div><span>Durasi terpakai</span><b id="resultElapsed">—</b></div><div><span>Jumlah soal</span><b id="resultQuestionCount">—</b></div><div><span>Skema nilai</span><b id="resultScoring">Skor akhir 0–100</b></div></div>
+            <div class="result-actions"><button class="button button-primary" type="button" id="printButton">Cetak / Simpan PDF <span>↗</span></button><button class="button button-secondary" type="button" id="downloadJsonButton">Unduh hasil JSON <span>↓</span></button></div>
+          </section>
+        </div>
+
+        <section class="panel review-panel"><div class="review-header"><div><div class="eyebrow muted-eyebrow">ANSWER ANALYSIS</div><h2>Tinjau jawaban</h2><p>Lihat jawaban pilihanmu dan kunci setelah ujian selesai.</p></div><button class="button button-secondary" type="button" id="toggleReviewButton" aria-expanded="false">Buka pembahasan <span>⌄</span></button></div><div id="reviewContent" class="review-content" hidden></div></section>
+        <div class="bottom-actions"><button class="button button-secondary" type="button" id="backHomeButton">↙ Kembali ke beranda</button><button class="button button-primary" type="button" id="retakeButton">Ulangi ujian <span>↗</span></button></div>
+        <footer class="page-footer"><span>TECH EXAM © 2026</span><span>LEARN. REVIEW. IMPROVE. <b>●</b></span></footer>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
